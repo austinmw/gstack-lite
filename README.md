@@ -1,57 +1,35 @@
 # gstack-lite
 
-`gstack-lite` is a standalone, markdown-only take on gstack: minimal ceremony, lower cognitive load, and no generated skill layer.
+`gstack-lite` is a markdown-only, low-ceremony version of gstack.
 
-The tradeoff is real. Removing the bootstrap code, shared preambles, browser/runtime hooks, and host-specific automation reduces some of the repeatability, safety checks, and operational consistency of the full version. The upside is that each skill is easier to read, copy, tweak, and use as plain text.
+It keeps the parts of the original skills that are genuinely useful as thinking frameworks and strips out most of the bootstrap code, host-specific automation, and prompt theater.
 
-These skills are readable first. They explain what to do in plain English instead of asking the reader to execute setup code before they can understand the skill.
+Each skill is a single canonical markdown file in `skills/`.
 
-Unlike the main repo, `gstack-lite` skills are not generated. Each lite skill is a single canonical markdown file.
+## Principles
 
-## Curation Principle
-
-`gstack-lite` is curated, not copied verbatim.
-
-The rule is simple: keep only the parts of a skill that add real value beyond a generic prompt like "review this PR" or "help me plan this." Boilerplate, theater, host-specific setup, and low-value ceremony are cut aggressively.
-
-If a skill is mostly workflow glue and not much thinking, it stays small or is omitted.
+- Keep only what adds value beyond a generic prompt.
+- Prefer readable plain English over setup instructions.
+- Preserve strong judgment frameworks; shrink or omit workflow glue.
 
 ## Tradeoffs
 
-Current tradeoffs of the lite version:
+- Less repeatable than full gstack.
+- Weaker automation, browser integration, and host-aware behavior.
+- Stronger on thinking than on tool-heavy workflows.
+- Some original skills are intentionally omitted.
 
-- It loses a lot of the repeatability that comes from explicit tool orchestration and shared preambles.
-- It is weaker at host-aware behavior, automation, and stateful workflows.
-- Skills that depended on real browser tooling, generated artifacts, or repo-local helper scripts lose some of their force when reduced to plain markdown.
-- Some full gstack skills are mostly workflow glue; in lite they are much smaller or omitted.
-- The port is intentionally opinionated and lossy. It preserves what seems genuinely useful, not everything the original system did.
-- The lite set is intentionally stronger on thinking frameworks than on automation-heavy skills.
-- The lite skills are mostly standalone. They do not automatically invoke one another the way the full system did, so the README has to carry more of the workflow map.
-- Some original skills are intentionally not included. `/autoplan` was mostly orchestration, and `/design-html` was too tied to a specific toolchain.
+## Start Here
 
-## Structure
+If you only read a few skills, start with these:
 
-- `skills/`: prose-first lite versions of individual skills
-- `README.md`: short map of the whole skill set
+- [`/office-hours`](./skills/office-hours.md)
+- [`/plan-eng-review`](./skills/plan-eng-review.md)
+- [`/review`](./skills/review.md)
+- [`/investigate`](./skills/investigate.md)
+- [`/qa`](./skills/qa.md)
 
-Each lite skill should start with a short TL;DR that answers two questions:
-
-- what is this skill trying to do?
-- how should someone actually use it?
-
-## Strongest Skills
-
-If you only read a few, start with these:
-
-- [`/office-hours`](./skills/office-hours.md): the best early-stage idea sharpening skill
-- [`/plan-eng-review`](./skills/plan-eng-review.md): one of the strongest planning skills in the set
-- [`/review`](./skills/review.md): the strongest code-review skill in the set
-- [`/investigate`](./skills/investigate.md): the strongest debugging skill in the set
-- [`/qa`](./skills/qa.md): strong when you have real browser access and want a fix-and-verify loop
-
-These are the skills that most clearly add something beyond a generic prompt.
-
-## One-Line Skill List
+## Skill List
 
 - `/office-hours`: sharpen an idea
 - `/plan-ceo-review`: challenge product scope
@@ -82,106 +60,39 @@ These are the skills that most clearly add something beyond a generic prompt.
 - `/unfreeze`: remove scope restriction
 - `/learn`: keep project memory
 
-## Active Lite Skills
+## How to Use It
 
-### Advisory / Plan
+Do not try to memorize every skill or run all of them in order.
 
-- [`/office-hours`](./skills/office-hours.md): sharpen an idea before coding
-- [`/plan-ceo-review`](./skills/plan-ceo-review.md): challenge product framing and scope
-- [`/plan-eng-review`](./skills/plan-eng-review.md): harden the implementation plan
-- [`/plan-design-review`](./skills/plan-design-review.md): catch design gaps before building
+Use a few entry skills and branch only when the current phase needs it.
 
-### Design
-
-- [`/design-consultation`](./skills/design-consultation.md): define a visual direction
-- [`/design-shotgun`](./skills/design-shotgun.md): explore real alternatives
-- [`/design-review`](./skills/design-review.md): audit and polish the implemented UI
-
-### Engineering Review / Diagnosis
-
-- [`/review`](./skills/review.md): serious pre-merge diff review
-- [`/investigate`](./skills/investigate.md): root-cause-first debugging
-- [`/cso`](./skills/cso.md): focused security review
-- [`/benchmark`](./skills/benchmark.md): performance regression checks
-- [`/codex`](./skills/codex.md): independent second opinion
-
-### QA / Browser Validation
-
-- [`/qa`](./skills/qa.md): test, fix, and re-verify
-- [`/qa-only`](./skills/qa-only.md): report-only QA
-- [`/browse`](./skills/browse.md): runtime browser testing
-- [`/connect-chrome`](./skills/connect-chrome.md): visible shared-browser workflow
-- [`/setup-browser-cookies`](./skills/setup-browser-cookies.md): authenticated-browser setup
-
-### Ship / Release / Operate
-
-- [`/ship`](./skills/ship.md): final branch and PR checklist
-- [`/land-and-deploy`](./skills/land-and-deploy.md): merge, deploy, and verify
-- [`/canary`](./skills/canary.md): short post-deploy watch
-- [`/document-release`](./skills/document-release.md): sync docs to reality
-- [`/retro`](./skills/retro.md): lightweight retrospective
-- [`/setup-deploy`](./skills/setup-deploy.md): record deploy configuration
-
-### Safety / Scope
-
-- [`/careful`](./skills/careful.md): pause before destructive actions
-- [`/freeze`](./skills/freeze.md): restrict edit scope
-- [`/guard`](./skills/guard.md): combine caution and scope restriction
-- [`/unfreeze`](./skills/unfreeze.md): remove the scope restriction
-
-### Memory
-
-- [`/learn`](./skills/learn.md): keep lightweight project memory
-
-## Not Included
-
-- `/autoplan`: omitted because its value was mostly orchestration, and the README workflow already captures the useful part.
-- `/design-html`: omitted because the original was too tied to a specific design-to-HTML toolchain to preserve honestly as a general markdown skill.
-- `/gstack-upgrade`: omitted because there is no generated/runtime stack to upgrade in the same way.
-
-## Intended Workflow
-
-Do not try to memorize every skill and manually call all of them in sequence.
-
-The better mental model is:
-
-- remember a few entry skills
-- start with the one that matches the current phase
-- branch only when that phase reveals a real need
-
-The lite skills mostly do not route you automatically. Use this README as the map. The individual skill files should stay readable and mostly standalone.
-
-### The main entry skills
+### Main Entry Skills
 
 - `/office-hours` when the idea is still fuzzy
-- `/investigate` when behavior is broken and you do not yet know why
-- `/review` when code exists and you want to know if it is actually safe
+- `/investigate` when something is broken and you do not yet know why
+- `/review` when code exists and you want to know if it is safe
 - `/qa` when the product needs user-centered testing
 
-### The normal backbone
-
-The default path is:
+### Default Backbone
 
 `/office-hours` → `/plan-ceo-review` → `/plan-eng-review` → `/review` → `/qa` → `/ship` → `/document-release` → `/retro`
 
-That is the backbone, not a mandatory ritual. Use the pieces that match the stage you are in.
+Use the parts that match the stage you are in. This is a default path, not a ritual.
 
-### The main branches
+### Common Branches
 
-- If the work is UI-heavy, branch into `/plan-design-review`, `/design-consultation`, `/design-shotgun`, and `/design-review`.
-- If you only want findings and not fixes, use `/qa-only` instead of `/qa`.
-- If the code is already shipped, move from `/ship` into `/land-and-deploy`, `/canary`, or `/benchmark` as needed.
-- If QA needs a real browser or an authenticated session, use `/browse`, `/connect-chrome`, or `/setup-browser-cookies`.
-- If release steps are still tribal knowledge, use `/setup-deploy` before relying on deploy workflows.
-- If the risk is security, pull in `/cso` as a focused audit rather than treating it as part of every normal workflow.
-- If you want an outside voice, use `/codex` as an optional pressure test, not a default ritual.
-- If the work gets risky or messy, use `/careful`, `/freeze`, or `/guard`.
-- If old context matters, use `/learn` to recover or prune project memory.
+- UI-heavy work: `/plan-design-review` → `/design-consultation` → `/design-shotgun` → `/design-review`
+- Findings only: `/qa-only`
+- Shipped code: `/land-and-deploy`, `/canary`, `/benchmark`
+- Security-sensitive work: `/cso`
+- Outside voice: `/codex`
+- Browser/session setup: `/browse`, `/connect-chrome`, `/setup-browser-cookies`
+- Release setup: `/setup-deploy`
+- Risky or messy work: `/careful`, `/freeze`, `/guard`, `/unfreeze`
+- Old context or recurring lessons: `/learn`
 
-### How to think about the rest
+## Not Included
 
-- Some skills are real thinking frameworks: `/plan-eng-review`, `/review`, `/office-hours`.
-- Some are workflow wrappers: `/ship`, `/land-and-deploy`.
-- Some are control or safety tools: `/careful`, `/freeze`, `/guard`, `/unfreeze`.
-
-The lite version should preserve the first category most aggressively, keep the second category small, and cut the third category unless it adds clear value in plain English.
+- `/autoplan`: omitted because its value was mostly orchestration.
+- `/design-html`: omitted because it depended too heavily on a specific toolchain.
+- `/gstack-upgrade`: omitted because lite has no generated/runtime layer to upgrade.
